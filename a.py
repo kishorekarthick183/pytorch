@@ -1,21 +1,16 @@
-class MyContext:
+# def numbers():
+#     return [1, 2, 3, 4, 5]
 
-    def __enter__(self):
-        print("Entering")
+# print(numbers())
 
-    def __exit__(self, exc_type, exc_value, traceback):
-        print("Exiting")
-    
-with MyContext():
-    print("Inside")
+# vs 
 
-"""
-obj = MyContext()
+def numbers():
+    yield 1
+    yield 2
+    yield 3
+    yield 4
+    yield 5
 
-obj.__enter__()
-
-try:
-    print("Inside")
-finally:
-    obj.__exit__(...)
-"""
+for number in numbers():
+    print(number)
