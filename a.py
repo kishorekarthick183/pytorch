@@ -1,5 +1,9 @@
 import torch
 
-x = torch.tensor([1, 2, 3])
+x = torch.tensor(3.0, requires_grad=True)
 
-print(x.dtype)
+y = x ** 2
+
+y.backward()
+
+print(x.grad)
