@@ -1,12 +1,6 @@
-import numpy as np
+import torch
 
-# @ vs * 
-# @ matrix multiplction
-# * element multiplication
-
-a = np.arange(0, 10)
-print(a)
-b = np.zeros((2, 3))
-print(b)
-c = np.ones((2, 3))
-print(c)
+x = torch.arange(6)
+y = x.reshape(2, 3)
+z = x.view(2, 3)
+print(y, z)
