@@ -1,5 +1,21 @@
-file = open("data.txt")
+class MyContext:
+
+    def __enter__(self):
+        print("Entering")
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("Exiting")
+    
+with MyContext():
+    print("Inside")
+
+"""
+obj = MyContext()
+
+obj.__enter__()
+
 try:
-    print(file.read())
+    print("Inside")
 finally:
-    file.close()
+    obj.__exit__(...)
+"""
