@@ -1,24 +1,22 @@
-class BankAccount: 
-    def __init__(self, owner: str, balance: float = 0.0):
-        self.owner = owner
-        self.balance = balance
-    
-    def deposit(self, amount: float) -> float: 
-        if amount <= 0:
-            raise ValueError("deposit amt must be positive")
-        self.balance += amount
-        print(f"Deposited ${amount: .2f}. New Balance: ${self.balance: .2f}")
-        return self.balance 
-    def withdraw(self, amount: float) -> float: 
-        if amount <= 0: 
-            raise ValueError("deposit amt must be positive")
-        if self.balance < amount: 
-            raise ValueError("insufficient funds")
-        
-        self.balance  -= amount
-        print(f"Withdrew ${amount:.2f}. New balance: ${self.balance:.2f}")
-        return self.balance
+class FileManager:
+    def __init__(self, filename: str, mode: str):
+        self.filename = filename
+        self.mode = mode
+        self.file = None
 
-acc = BankAccount("Kishore", 100.0)
-acc.deposit(50.0)
-acc.withdraw(30.0)
+    def __enter__(self):
+        print(f"Opening file: {self.filename}")
+        self.file = open(self.filename, self.mode, encoding="utf-8")
+        return self.file
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.file:
+            self.file.close()
+            print(f"Closed file: {self.filename}")
+        # Return False so exceptions raised inside the block aren't swallowed
+        return False
+
+
+# Usage
+with FileManager("sample.txt", "w") as f:
+    f.write("Hello, World!")
