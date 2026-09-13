@@ -1,3 +1,5 @@
-with open("data.txt") as file: 
-    content = file.read()
-    print(content)
+file = open("data.txt")
+try:
+    print(file.read())
+finally:
+    file.close()
