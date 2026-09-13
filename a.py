@@ -11,4 +11,5 @@ X = np.array([
     ]
 ])
 
-print(X.shape)
+print(X.ndim)
+# 3
