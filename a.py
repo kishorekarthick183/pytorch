@@ -9,9 +9,8 @@ def logger(func):
 
     return wrapper
 
+@logger
 def hello():
     print("Hello")
-
-hello = logger(hello)
 
 hello()
