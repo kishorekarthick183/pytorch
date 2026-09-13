@@ -8,3 +8,7 @@
 5. arry operations
 6. broadcasting
 7. reshaping
+8. tensor shapes
+9. reshape vs view
+10. device?
+11. dtype
