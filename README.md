@@ -5,3 +5,6 @@
 2. decorators
 3. context managers
 4. generators
+5. arry operations
+6. broadcasting
+7. reshaping
