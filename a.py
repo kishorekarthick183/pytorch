@@ -1,14 +1,38 @@
 import torch
 
-# Dummy model weights
-w = torch.tensor([1.5], requires_grad=True)
-b = torch.tensor([0.5], requires_grad=True)
+w = torch.tensor(2.0, requires_grad=True)
 
-test_x = torch.tensor([2.0, 4.0, 6.0])
+x = torch.tensor(3.0)
+actual = torch.tensor(10.0)
 
-# Disable gradient tracking for inference
+learning_rate = 0.01
+
+# Forward
+prediction = w * x
+
+# Loss
+loss = (prediction - actual) ** 2
+
+# Gradient
+loss.backward()
+
+print("Before:", w.item())
+print("Gradient:", w.grad.item())
+
+# Update
 with torch.no_grad():
-    predictions = test_x * w + b
+    w -= learning_rate * w.grad
 
-print(predictions)
-print(predictions.requires_grad)  # Output: False
+print("After:", w.item())
+
+# actual vs predicted. 
+# let actual be  10. then predict = 2 * 3 = 6
+# loss = (4) ** 2 = 16. let loss = 16 then when 
+# loss.backward() is mean is dL / dw = can be calculated by gradient. isn't it ? 
+# w is before item. before the input is 2 in w.item(). then we have updated to 
+# w -= rate * grad. 
+# yep make tthe weight to change so to better results in the actual output. 
+# lets make it obvious. when 2 * 3 we get 6. when we want 10 then we can make the 2 to be increased 
+# rigth ? so w.item willllll resultss in After: 2.240000009536743
+# thus we have increased the w by iterating single time so we can achieve the actual value
+# 
