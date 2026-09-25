@@ -175,3 +175,11 @@ print(correct.squeeze())
 print("\nAccuracy:", accuracy.item())
 
 print("\nDecision Boundary:", decision_boundary.item())
+# -------------------------
+# f1 score
+# ------------------------
+f1_score = 2 * (precision * recall) / (precision + recall)
+
+print("Precision:", precision.item())
+print("Recall:", recall.item())
+print("F1 Score:", f1_score.item())
