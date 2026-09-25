@@ -7,23 +7,29 @@ actual = torch.tensor(10.0)
 
 learning_rate = 0.01
 
-# Forward
-prediction = w * x
+for i in range(1000):
+    # Forward
+    prediction = w * x
 
-# Loss
-loss = (prediction - actual) ** 2
+    # Loss
+    loss = (prediction - actual) ** 2
 
-# Gradient
-loss.backward()
+    # Gradient
+    loss.backward()
 
-print("Before:", w.item())
-print("Gradient:", w.grad.item())
+    print(
+        "iteration:", i,
+        "w:", w.item(),
+        "prediction:", prediction.item(),
+        "loss:", loss.item(),
+        "gradient:", w.grad.item()
+    )
 
-# Update
-with torch.no_grad():
-    w -= learning_rate * w.grad
+    # Update
+    with torch.no_grad():
+        w -= learning_rate * w.grad
 
-print("After:", w.item())
+    w.grad.zero_()
 
 # actual vs predicted. 
 # let actual be  10. then predict = 2 * 3 = 6
