@@ -1,44 +1,30 @@
 import torch
 
-w = torch.tensor(2.0, requires_grad=True)
-
+w = torch.tensor(0.0, requires_grad=True)
+b = torch.tensor(0.0, requires_grad=True)
 x = torch.tensor(3.0)
-actual = torch.tensor(10.0)
+
+actual = torch.tensor(7.0)
 
 learning_rate = 0.01
+prediction = w * x + b
+print("prediction ", prediction)
 
-for i in range(1000):
-    # Forward
-    prediction = w * x
+# Loss
+loss = (prediction - actual) ** 2
 
-    # Loss
-    loss = (prediction - actual) ** 2
+print(loss) # (7 - (0 * 3 + 0))^2 -> 49.
 
-    # Gradient
-    loss.backward()
+# Gradient
+loss.backward()
 
-    print(
-        "iteration:", i,
-        "w:", w.item(),
-        "prediction:", prediction.item(),
-        "loss:", loss.item(),
-        "gradient:", w.grad.item()
-    )
+print(w.grad) # -42
+print(b.grad) # -14
 
-    # Update
-    with torch.no_grad():
-        w -= learning_rate * w.grad
-
-    w.grad.zero_()
-
-# actual vs predicted. 
-# let actual be  10. then predict = 2 * 3 = 6
-# loss = (4) ** 2 = 16. let loss = 16 then when 
-# loss.backward() is mean is dL / dw = can be calculated by gradient. isn't it ? 
-# w is before item. before the input is 2 in w.item(). then we have updated to 
-# w -= rate * grad. 
-# yep make tthe weight to change so to better results in the actual output. 
-# lets make it obvious. when 2 * 3 we get 6. when we want 10 then we can make the 2 to be increased 
-# rigth ? so w.item willllll resultss in After: 2.240000009536743
-# thus we have increased the w by iterating single time so we can achieve the actual value
-# 
+# Update
+with torch.no_grad():
+    w -= learning_rate * w.grad
+    b -= learning_rate * b.grad
+    print(w) # 0.42
+    print(b) # 0.14
+    print("prediction new ", w * x+ b)
